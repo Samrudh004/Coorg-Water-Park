@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coorg Water Park — Privacy Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --gold-dim: #8a6b2a;
+    --deep: #060d18;
+    --deep2: #0b1624;
+    --navy: #0f1e30;
+    --navy2: #162840;
+    --text: #d4cfc6;
+    --muted: #7a8898;
+    --white: #f5f0e8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── CANVAS WATER BACKGROUND ── */
+  #water-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-glow 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.12); }
+  }
+
+  .hero-ring {
+    position: absolute;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 50%;
+    animation: rotate-ring 30s linear infinite;
+  }
+  .hero-ring:nth-child(1) { width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-ring:nth-child(2) { width: 700px; height: 700px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 50s; animation-direction: reverse; }
+  .hero-ring:nth-child(3) { width: 900px; height: 900px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-duration: 70s; border-color: rgba(201,168,76,0.07); }
+
+  @keyframes rotate-ring {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to   { transform: translate(-50%,-50%) rotate(360deg); }
+  }
+
+  .hero-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fade-up 1s ease 0.3s forwards;
+  }
+
+  .hero-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fade-up 1.2s ease 0.5s forwards;
+  }
+
+  .hero-logo em {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+    font-size: 0.55em;
+    letter-spacing: 0.25em;
+    margin-top: 0.4rem;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2.5rem auto;
+    width: 340px;
+    opacity: 0;
+    animation: fade-up 1s ease 0.8s forwards;
+  }
+  .hero-divider::before, .hero-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .hero-divider::after {
+    background: linear-gradient(to left, transparent, var(--gold-dim));
+  }
+  .hero-divider span {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .hero-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fade-up 1s ease 1s forwards;
+  }
+
+  .scroll-cta {
+    opacity: 0;
+    animation: fade-up 1s ease 1.3s forwards;
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    cursor: pointer;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    transition: color 0.3s;
+  }
+  .scroll-cta:hover { color: var(--gold); }
+  .scroll-arrow {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    animation: arrow-pulse 2s ease-in-out infinite;
+  }
+  @keyframes arrow-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(1.2); opacity: 0.5; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(6,13,24,0.9), transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    transition: all 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(6,13,24,0.95);
+    padding: 1rem 4rem;
+    border-bottom-color: rgba(201,168,76,0.2);
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 2rem;
+  }
+
+  .container { max-width: 920px; margin: 0 auto; }
+
+  /* ── SECTION HEADER ── */
+  .section-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--gold);
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* ── APP SHOWCASE ── */
+  #app {
+    background: linear-gradient(135deg, var(--deep2) 0%, var(--navy) 100%);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .app-phone {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .phone-frame {
+    width: 220px;
+    background: var(--navy2);
+    border-radius: 36px;
+    border: 2px solid rgba(201,168,76,0.3);
+    padding: 18px 10px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1), inset 0 0 30px rgba(201,168,76,0.03);
+    animation: float 6s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .phone-notch {
+    width: 70px; height: 6px;
+    background: rgba(201,168,76,0.2);
+    border-radius: 3px;
+    margin: 0 auto 14px;
+  }
+
+  .phone-screen {
+    background: linear-gradient(160deg, #0d1f35 0%, #0a1628 100%);
+    border-radius: 24px;
+    padding: 1.5rem 1rem;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .phone-app-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+    animation: icon-glow 3s ease-in-out infinite;
+  }
+  @keyframes icon-glow {
+    0%, 100% { box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
+    50% { box-shadow: 0 6px 30px rgba(201,168,76,0.6); }
+  }
+
+  .phone-app-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--white);
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  .phone-scan-box {
+    width: 110px; height: 110px;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    position: relative;
+    margin: 0.5rem auto;
+    animation: scan-line 2.5s ease-in-out infinite;
+  }
+  .phone-scan-box::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    animation: scan-sweep 2.5s ease-in-out infinite;
+  }
+  @keyframes scan-sweep {
+    0% { top: 0; opacity: 1; }
+    100% { top: 100%; opacity: 0.3; }
+  }
+  .scan-corner {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-color: var(--gold-light);
+    border-style: solid;
+  }
+  .scan-corner.tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; border-radius: 3px 0 0 0; }
+  .scan-corner.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-radius: 0 3px 0 0; }
+  .scan-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-radius: 0 0 0 3px; }
+  .scan-corner.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-radius: 0 0 3px 0; }
+
+  .phone-status {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .phone-features {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+  }
+  .phone-feat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.6rem;
+    background: rgba(201,168,76,0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .phone-feat-dot {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+  @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+  .phone-glow-ring {
+    position: absolute;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    animation: ring-expand 4s ease-out infinite;
+  }
+  @keyframes ring-expand {
+    0% { transform: translate(-50%,-50%) scale(0.7); opacity: 0.6; }
+    100% { transform: translate(-50%,-50%) scale(1.3); opacity: 0; }
+  }
+
+  .app-info { }
+  .app-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .feat-item {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    background: rgba(201,168,76,0.03);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-left: 2px solid var(--gold-dim);
+    border-radius: 0 8px 8px 0;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  .feat-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .feat-item:hover {
+    background: rgba(201,168,76,0.07);
+    border-left-color: var(--gold);
+  }
+  .feat-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .feat-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .feat-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── PRIVACY POLICY ── */
+  #privacy {
+    background: var(--deep);
+  }
+
+  .policy-wrapper {
+    background: rgba(15,30,48,0.6);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .policy-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .policy-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  }
+
+  .policy-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .policy-date {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+  .policy-badge {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--deep);
+    background: var(--gold);
+    padding: 0.35rem 0.9rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .policy-toc {
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 2px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+  .policy-toc-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .policy-toc ol {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+  }
+  .policy-toc li a {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .policy-toc li a::before {
+    content: attr(data-num);
+    color: var(--gold-dim);
+    font-size: 0.62rem;
+    font-family: 'Cormorant Garamond', serif;
+    min-width: 1.2rem;
+  }
+  .policy-toc li a:hover { color: var(--gold); }
+
+  .policy-section {
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .policy-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .policy-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .policy-h1 .num {
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .policy-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin: 1.8rem 0 0.8rem;
+    font-style: italic;
+  }
+
+  .policy-p {
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .policy-ul {
+    list-style: none;
+    margin: 0.8rem 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .policy-ul li {
+    font-size: 0.8rem;
+    color: var(--text);
+    padding: 0.5rem 0.8rem;
+    border-left: 1px solid var(--gold-dim);
+    padding-left: 1.2rem;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+  }
+  .policy-ul li::before {
+    content: '◆';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.4rem;
+    color: var(--gold);
+  }
+
+  .policy-divider {
+    border: none;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    margin: 2.5rem 0;
+  }
+
+  .policy-contact-block {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+  .policy-contact-block strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .contact-icon { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 10;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    background: var(--deep2);
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .footer-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .footer-note {
+    font-size: 0.65rem;
+    color: rgba(122,136,152,0.5);
+    letter-spacing: 0.1em;
+    font-style: italic;
+  }
+  .footer-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem auto;
+    max-width: 300px;
+  }
+  .footer-divider::before, .footer-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .footer-diamond {
+    width: 5px; height: 5px;
+    background: var(--gold-dim);
+    transform: rotate(45deg);
+  }
+
+  /* ── PARTICLES ── */
+  #particles { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+
+  /* ── SCROLL INDICATOR ── */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold-dim), var(--gold));
+    z-index: 200;
+    transition: width 0.1s;
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .app-grid { grid-template-columns: 1fr; }
+    .policy-wrapper { padding: 2rem 1.5rem; }
+    .policy-toc ol { grid-template-columns: 1fr; }
+    .policy-meta { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Canvas water background -->
+<canvas id="water-canvas"></canvas>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">Coorg Water Park</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#app">Mobile App</a></li>
+    <li><a href="#privacy">Privacy Policy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <p class="hero-badge">Coorg · Karnataka · India</p>
+  <h1 class="hero-logo">
+    Coorg Water Park
+    <em>Enterprise Mobile Platform</em>
+  </h1>
+  <div class="hero-divider"><span></span></div>
+  <p class="hero-sub">Ticketing · Access Control · Inventory · Payments</p>
+  <div class="scroll-cta" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">
+    <span>Discover</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- APP SHOWCASE -->
+<section id="app">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-phone">
+        <div class="phone-glow-ring"></div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-app-icon">🏞️</div>
+            <div class="phone-app-name">Coorg Water Park</div>
+            <div class="phone-scan-box">
+              <div class="scan-corner tl"></div>
+              <div class="scan-corner tr"></div>
+              <div class="scan-corner bl"></div>
+              <div class="scan-corner br"></div>
+            </div>
+            <div class="phone-status">● Scanning Active</div>
+            <div class="phone-features">
+              <div class="phone-feat"><div class="phone-feat-dot"></div>QR Ticket Verified</div>
+              <div class="phone-feat"><div class="phone-feat-dot"></div>Access Granted</div>
+              <div class="phone-feat"><div class="phone-feat-dot"></div>Payment Secured</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-info">
+        <p class="section-tag">Enterprise Mobile App</p>
+        <h2 class="section-title">Seamless Park <em>Operations</em></h2>
+        <div class="section-line"></div>
+        <p class="policy-p">The Coorg Water Park internal enterprise application is a purpose-built Android platform designed exclusively for our staff and operational teams. Built with Jetpack Compose and powered by ML Kit's advanced barcode intelligence.</p>
+
+        <div class="app-features">
+          <div class="feat-item">
+            <div class="feat-icon">📷</div>
+            <div>
+              <div class="feat-title">Camera & QR Scanning</div>
+              <div class="feat-desc">Real-time barcode and QR code recognition powered by ML Kit TensorFlow models. Instant validation with zero latency.</div>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">🎫</div>
+            <div>
+              <div class="feat-title">Ticketing & Access Control</div>
+              <div class="feat-desc">Validate park entry tickets, manage zone access, and maintain audit trails with full timestamp logging.</div>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">💳</div>
+            <div>
+              <div class="feat-title">Razorpay Payment Gateway</div>
+              <div class="feat-desc">Secure in-app payment processing integrated with Razorpay for on-premises transactions and ticket purchases.</div>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">📦</div>
+            <div>
+              <div class="feat-title">Inventory & Reporting</div>
+              <div class="feat-desc">Barcode-driven inventory tracking with automated operational reports synced to internal servers over encrypted HTTPS/TLS.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY POLICY -->
+<section id="privacy">
+  <div class="container">
+    <p class="section-tag reveal">Legal Documentation</p>
+    <h2 class="section-title reveal">Privacy <em>Policy</em></h2>
+    <div class="section-line"></div>
+
+    <div class="policy-wrapper">
+      <div class="policy-meta">
+        <div class="policy-date">Effective Date: 14 May 2026</div>
+        <div class="policy-badge">Internal Enterprise Use</div>
+      </div>
+
+      <!-- TABLE OF CONTENTS -->
+      <div class="policy-toc reveal">
+        <div class="policy-toc-title">Contents</div>
+        <ol>
+          <li><a href="#p1" data-num="01">Introduction</a></li>
+          <li><a href="#p2" data-num="02">Information We Collect</a></li>
+          <li><a href="#p3" data-num="03">How We Use Your Information</a></li>
+          <li><a href="#p4" data-num="04">Data Storage & Security</a></li>
+          <li><a href="#p5" data-num="05">Data Sharing</a></li>
+          <li><a href="#p6" data-num="06">Your Rights</a></li>
+          <li><a href="#p7" data-num="07">Changes to This Policy</a></li>
+          <li><a href="#p8" data-num="08">Contact Us</a></li>
+        </ol>
+      </div>
+
+      <!-- SECTION 1 -->
+      <div class="policy-section" id="p1">
+        <h3 class="policy-h1"><span class="num">01</span>Introduction</h3>
+        <p class="policy-p">Coorg Water Park ("we," "our," or "us") is committed to protecting the privacy of our employees, contractors, and authorized users who use our internal enterprise mobile application ("App"). This Privacy Policy explains what information we collect, how we use it, and the measures we take to keep it secure.</p>
+        <p class="policy-p">By using the App, you agree to the practices described in this policy. This App is intended exclusively for internal business use and is not available to the general public.</p>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 2 -->
+      <div class="policy-section" id="p2">
+        <h3 class="policy-h1"><span class="num">02</span>Information We Collect</h3>
+
+        <h4 class="policy-h2">2.1 Camera & QR / Barcode Data</h4>
+        <p class="policy-p">The App requests access to your device's camera solely for the purpose of scanning QR codes and barcodes as part of internal operations (e.g., ticketing, inventory, access control). The camera feed is processed in real time and is not recorded or stored on your device.</p>
+
+        <h4 class="policy-h2">2.2 Scanned Data Uploaded to Our Server</h4>
+        <p class="policy-p">The data extracted from scanned QR codes or barcodes (e.g., ticket IDs, product codes, access tokens) is transmitted to and stored on Coorg Water Park's internal servers. This data may include:</p>
+        <ul class="policy-ul">
+          <li>Scan timestamp and location within the park</li>
+          <li>Barcode or QR code value</li>
+          <li>Device identifier (for audit purposes)</li>
+          <li>User ID or employee / staff account associated with the scan</li>
+        </ul>
+
+        <h4 class="policy-h2">2.3 Device & Usage Information</h4>
+        <p class="policy-p">We may automatically collect limited technical information to support app performance and security, including:</p>
+        <ul class="policy-ul">
+          <li>Device model and operating system version</li>
+          <li>App version</li>
+          <li>Error logs and crash reports</li>
+        </ul>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 3 -->
+      <div class="policy-section" id="p3">
+        <h3 class="policy-h1"><span class="num">03</span>How We Use Your Information</h3>
+        <p class="policy-p">We use the collected information strictly for internal business operations, including:</p>
+        <ul class="policy-ul">
+          <li>Validating tickets and managing park entry / access control</li>
+          <li>Inventory tracking and operational reporting</li>
+          <li>Auditing and security monitoring</li>
+          <li>Troubleshooting technical issues with the App</li>
+          <li>Ensuring compliance with internal policies</li>
+        </ul>
+        <p class="policy-p">We do not use your data for advertising, marketing, or any purpose unrelated to Coorg Water Park's internal operations.</p>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 4 -->
+      <div class="policy-section" id="p4">
+        <h3 class="policy-h1"><span class="num">04</span>Data Storage & Security</h3>
+        <p class="policy-p">All data uploaded from the App is stored on secure servers maintained by or on behalf of Coorg Water Park. We implement appropriate technical and organizational measures to protect your data against unauthorized access, loss, or misuse, including:</p>
+        <ul class="policy-ul">
+          <li>Encrypted data transmission (HTTPS / TLS)</li>
+          <li>Access controls limiting data visibility to authorized personnel only</li>
+          <li>Regular security reviews of our systems</li>
+        </ul>
+        <p class="policy-p">Data is retained only as long as necessary to fulfill the operational purposes described in this policy, or as required by applicable law.</p>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 5 -->
+      <div class="policy-section" id="p5">
+        <h3 class="policy-h1"><span class="num">05</span>Data Sharing</h3>
+        <p class="policy-p">We do not sell or share your personal data with third parties for commercial purposes. Data may only be disclosed:</p>
+        <ul class="policy-ul">
+          <li>To authorized internal staff with a legitimate business need</li>
+          <li>To IT service providers or infrastructure partners acting on our behalf under strict confidentiality obligations</li>
+          <li>When required by law, regulation, or a valid legal order</li>
+        </ul>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 6 -->
+      <div class="policy-section" id="p6">
+        <h3 class="policy-h1"><span class="num">06</span>Your Rights</h3>
+        <p class="policy-p">As an authorized user of this internal App, you may:</p>
+        <ul class="policy-ul">
+          <li>Request access to data collected about your account or device</li>
+          <li>Request correction of inaccurate data</li>
+          <li>Request deletion of your data, subject to legal and operational retention requirements</li>
+        </ul>
+        <p class="policy-p">To exercise these rights, please contact your IT Administrator or HR department.</p>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 7 -->
+      <div class="policy-section" id="p7">
+        <h3 class="policy-h1"><span class="num">07</span>Changes to This Privacy Policy</h3>
+        <p class="policy-p">We may update this Privacy Policy from time to time. Any significant changes will be communicated through internal channels (e.g., email or in-app notification). Continued use of the App after such changes constitutes your acceptance of the updated policy.</p>
+      </div>
+
+      <hr class="policy-divider"/>
+
+      <!-- SECTION 8 -->
+      <div class="policy-section" id="p8" id="contact">
+        <h3 class="policy-h1"><span class="num">08</span>Contact Us</h3>
+        <p class="policy-p">If you have any questions or concerns about this Privacy Policy, please contact:</p>
+        <div class="policy-contact-block">
+          <strong>Coorg Water Park — IT / Data Privacy Team</strong>
+          <div class="contact-line"><span class="contact-icon">📧</span><span>Nani.lakmi007@gmail.com</span></div>
+          <div class="contact-line"><span class="contact-icon">📍</span><span>Coorg Water Park, Coorg (Kodagu), Karnataka, India</span></div>
+        </div>
+        <p class="policy-p" style="margin-top:1.5rem; font-style:italic; color:var(--muted); font-size:0.75rem;">This policy applies to internal enterprise use only and is not a public-facing document.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Coorg Water Park</div>
+  <div class="footer-sub">Coorg (Kodagu) · Karnataka · India</div>
+  <div class="footer-divider"><div class="footer-diamond"></div></div>
+  <p class="footer-note">© 2026 Coorg Water Park. Internal Enterprise Application. All rights reserved.<br>Package: com.sam.coorgwaterpark</p>
+</footer>
+
+<script>
+// ── WATER CANVAS BACKGROUND ──
+(function(){
+  const canvas = document.getElementById('water-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function wave(x, amp, freq, phase, speed){
+    return amp * Math.sin(freq * x + phase + speed * t);
+  }
+
+  function drawWaves(){
+    ctx.clearRect(0, 0, W, H);
+    const layers = [
+      { amp: 35, freq: 0.008, phase: 0,    speed: 0.8,  y: H * 0.45, color: 'rgba(30,80,140,0.4)' },
+      { amp: 28, freq: 0.012, phase: 2.1,  speed: 1.1,  y: H * 0.52, color: 'rgba(15,55,100,0.3)' },
+      { amp: 20, freq: 0.018, phase: 4.2,  speed: 0.6,  y: H * 0.60, color: 'rgba(10,40,80,0.25)' },
+      { amp: 15, freq: 0.025, phase: 1.0,  speed: 1.4,  y: H * 0.68, color: 'rgba(201,168,76,0.06)'},
+    ];
+    layers.forEach(l => {
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for(let x = 0; x <= W; x++){
+        ctx.lineTo(x, l.y + wave(x, l.amp, l.freq, l.phase, l.speed));
+      }
+      ctx.lineTo(W, H);
+      ctx.closePath();
+      ctx.fillStyle = l.color;
+      ctx.fill();
+    });
+    t += 0.012;
+    requestAnimationFrame(drawWaves);
+  }
+  drawWaves();
+})();
+
+// ── PARTICLES ──
+(function(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const pts = [];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for(let i = 0; i < 60; i++){
+    pts.push({
+      x: Math.random() * 1000,
+      y: Math.random() * 1000,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3 - 0.1,
+      r: Math.random() * 1.5 + 0.3,
+      alpha: Math.random() * 0.5 + 0.1,
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if(p.x < 0) p.x = W;
+      if(p.x > W) p.x = 0;
+      if(p.y < 0) p.y = H;
+      if(p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${p.alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── NAV SCROLL ──
+const nav = document.getElementById('nav');
+const scrollProgress = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (scrollTop / scrollHeight) * 100;
+  scrollProgress.style.width = pct + '%';
+  nav.classList.toggle('scrolled', scrollTop > 60);
+});
+
+// ── INTERSECTION OBSERVER ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal, .policy-section, .feat-item').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
