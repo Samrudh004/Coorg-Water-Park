@@ -1,2 +1,3 @@
 # Coorg-Water-Park
-Coorg Water Park internal staff app for QR &amp; barcode scanning operations.
+Coorg Water Park – Thrills, Fun & Adventure in the Heart of Coorg!
+
